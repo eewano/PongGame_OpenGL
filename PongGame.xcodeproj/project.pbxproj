@@ -1,0 +1,318 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10EE110A1EE103D900DF8D57 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10EE11081EE103D900DF8D57 /* Input.cpp */; };
+		10EE110E1EE1105400DF8D57 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10EE110D1EE1105400DF8D57 /* Sprite.cpp */; };
+		10F613231ED823E700194313 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10F613221ED823E700194313 /* main.cpp */; };
+		10F6132B1ED823F900194313 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F6132A1ED823F900194313 /* OpenGL.framework */; };
+		10F6132D1ED823FF00194313 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F6132C1ED823FF00194313 /* IOKit.framework */; };
+		10F6132F1ED8240400194313 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F6132E1ED8240400194313 /* Cocoa.framework */; };
+		10F613311ED8240C00194313 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F613301ED8240C00194313 /* CoreVideo.framework */; };
+		10F613331ED8241600194313 /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F613321ED8241600194313 /* libglfw3.a */; };
+		10F613351ED8241F00194313 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10F613341ED8241F00194313 /* libGLEW.a */; };
+		10F613381ED824C100194313 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10F613361ED824C100194313 /* Shader.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		10F6131D1ED823E700194313 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		10DE0ADC1EE25B2B00ABA1BB /* Score.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Score.hpp; sourceTree = "<group>"; };
+		10E421201EE4EB0C001B9A0F /* GameOver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameOver.hpp; sourceTree = "<group>"; };
+		10EE11081EE103D900DF8D57 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
+		10EE11091EE103D900DF8D57 /* Input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
+		10EE110D1EE1105400DF8D57 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		10F6131F1ED823E700194313 /* PongGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PongGame; sourceTree = BUILT_PRODUCTS_DIR; };
+		10F613221ED823E700194313 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		10F6132A1ED823F900194313 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		10F6132C1ED823FF00194313 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		10F6132E1ED8240400194313 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		10F613301ED8240C00194313 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		10F613321ED8241600194313 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../../usr/local/lib/libglfw3.a; sourceTree = "<group>"; };
+		10F613341ED8241F00194313 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../usr/local/lib/libGLEW.a; sourceTree = "<group>"; };
+		10F613361ED824C100194313 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
+		10F613371ED824C100194313 /* Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		10F613391ED8250500194313 /* Data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Data.hpp; sourceTree = "<group>"; };
+		10F6133B1ED8253400194313 /* Sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
+		10F6133E1ED825AF00194313 /* Bar.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bar.hpp; sourceTree = "<group>"; };
+		10F613411ED8307D00194313 /* Ball.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		10F6131C1ED823E700194313 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10F613351ED8241F00194313 /* libGLEW.a in Frameworks */,
+				10F613331ED8241600194313 /* libglfw3.a in Frameworks */,
+				10F613311ED8240C00194313 /* CoreVideo.framework in Frameworks */,
+				10F6132F1ED8240400194313 /* Cocoa.framework in Frameworks */,
+				10F6132D1ED823FF00194313 /* IOKit.framework in Frameworks */,
+				10F6132B1ED823F900194313 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		10F613161ED823E700194313 = {
+			isa = PBXGroup;
+			children = (
+				10F613211ED823E700194313 /* PongGame */,
+				10F613201ED823E700194313 /* Products */,
+				10F613291ED823F900194313 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		10F613201ED823E700194313 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				10F6131F1ED823E700194313 /* PongGame */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		10F613211ED823E700194313 /* PongGame */ = {
+			isa = PBXGroup;
+			children = (
+				10F613221ED823E700194313 /* main.cpp */,
+				10F613361ED824C100194313 /* Shader.cpp */,
+				10F613371ED824C100194313 /* Shader.hpp */,
+				10F613391ED8250500194313 /* Data.hpp */,
+				10EE110D1EE1105400DF8D57 /* Sprite.cpp */,
+				10F6133B1ED8253400194313 /* Sprite.hpp */,
+				10F6133E1ED825AF00194313 /* Bar.hpp */,
+				10F613411ED8307D00194313 /* Ball.hpp */,
+				10DE0ADC1EE25B2B00ABA1BB /* Score.hpp */,
+				10EE11081EE103D900DF8D57 /* Input.cpp */,
+				10EE11091EE103D900DF8D57 /* Input.hpp */,
+				10E421201EE4EB0C001B9A0F /* GameOver.hpp */,
+			);
+			path = PongGame;
+			sourceTree = "<group>";
+		};
+		10F613291ED823F900194313 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10F613341ED8241F00194313 /* libGLEW.a */,
+				10F613321ED8241600194313 /* libglfw3.a */,
+				10F613301ED8240C00194313 /* CoreVideo.framework */,
+				10F6132E1ED8240400194313 /* Cocoa.framework */,
+				10F6132C1ED823FF00194313 /* IOKit.framework */,
+				10F6132A1ED823F900194313 /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		10F6131E1ED823E700194313 /* PongGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 10F613261ED823E700194313 /* Build configuration list for PBXNativeTarget "PongGame" */;
+			buildPhases = (
+				10F6131B1ED823E700194313 /* Sources */,
+				10F6131C1ED823E700194313 /* Frameworks */,
+				10F6131D1ED823E700194313 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PongGame;
+			productName = PongGame;
+			productReference = 10F6131F1ED823E700194313 /* PongGame */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		10F613171ED823E700194313 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = eewano;
+				TargetAttributes = {
+					10F6131E1ED823E700194313 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 10F6131A1ED823E700194313 /* Build configuration list for PBXProject "PongGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 10F613161ED823E700194313;
+			productRefGroup = 10F613201ED823E700194313 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				10F6131E1ED823E700194313 /* PongGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		10F6131B1ED823E700194313 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10EE110A1EE103D900DF8D57 /* Input.cpp in Sources */,
+				10F613381ED824C100194313 /* Shader.cpp in Sources */,
+				10EE110E1EE1105400DF8D57 /* Sprite.cpp in Sources */,
+				10F613231ED823E700194313 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		10F613241ED823E700194313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		10F613251ED823E700194313 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		10F613271ED823E700194313 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		10F613281ED823E700194313 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		10F6131A1ED823E700194313 /* Build configuration list for PBXProject "PongGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10F613241ED823E700194313 /* Debug */,
+				10F613251ED823E700194313 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10F613261ED823E700194313 /* Build configuration list for PBXNativeTarget "PongGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10F613271ED823E700194313 /* Debug */,
+				10F613281ED823E700194313 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 10F613171ED823E700194313 /* Project object */;
+}

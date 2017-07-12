@@ -1,5 +1,5 @@
-#ifndef Data_h
-#define Data_h
+#ifndef Define_h
+#define Define_h
 
 struct Vec2
 {
@@ -23,4 +23,4 @@ public:
 static Vec2 WINDOW_SIZE = {800.0f, 600.0f};
 static float ASPECT_RATIO = WINDOW_SIZE.x / WINDOW_SIZE.y;
 
-#endif /* Data_h */
+#endif /* Define_h */

@@ -2,8 +2,7 @@
 #define Shader_hpp
 
 #include <GLFW/glfw3.h>
-
-#include "Data.hpp"
+#include "Define.hpp"
 
 class Shader
 {

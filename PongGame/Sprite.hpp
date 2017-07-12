@@ -3,9 +3,8 @@
 
 #include <iostream>
 #include <linmath.h>
-
 #include "Shader.hpp"
-#include "Data.hpp"
+#include "Define.hpp"
 
 extern Shader shader;
 
@@ -28,7 +27,6 @@ public:
         
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glUniformMatrix4fv(shader.mMvpLocation, 1, false, (const GLfloat*)mvp);
-        //ここでShaderに値を渡しておかないと描画されない(今回はgeometryの値を渡していなかった)
         glVertexAttribPointer(shader.mPositionLocation, 2, GL_FLOAT, false, 0, geometry);
         glVertexAttribPointer(shader.mUvLocation, 2, GL_FLOAT, false, 0, uv);
         

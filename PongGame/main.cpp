@@ -9,12 +9,14 @@
 #include <vector>
 
 #include "Shader.hpp"
-#include "Data.hpp"
+#include "Define.hpp"
 #include "Bar.hpp"
 #include "Ball.hpp"
 #include "Input.hpp"
 #include "Score.hpp"
 #include "GameOver.hpp"
+#include "Utility.hpp"
+#include "Loader.hpp"
 
 #define TIME 60
 #define WIN_SCORE 2
@@ -31,9 +33,6 @@ bool IsTouchedBar01_X(Sprite<IBall> ball, Sprite<IBar> bar);
 template<int IBall, int IBar>
 bool IsTouchedBar02_X(Sprite<IBall> ball, Sprite<IBar> bar);
 
-GLuint LoadBmp(const char* filename, int size);
-std::string GetCurrentWorkingDir(void);
-
 Shader shader;
 Input input;
 
@@ -41,16 +40,16 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "Current directory is " << GetCurrentWorkingDir().c_str() << ".\n";
     
-    auto ball = std::make_unique<Ball<BALL_VERTS_COUNT>>(BALL_RADIUS, 75.0f, 0.02f);
-    auto bar01 = std::make_unique<Bar<BAR_VERTS_COUNT>>(BAR_SIZE, Vec2{-0.5f, 0.0f});
-    auto bar02 = std::make_unique<Bar<BAR_VERTS_COUNT>>(BAR_SIZE, Vec2{0.5f, 0.0f});
-    auto scoreLeft10 = std::make_unique<Score<>>(SCORE_SIZE, Vec2{-0.55f, 0.4f});
-    auto scoreLeft01 = std::make_unique<Score<>>(SCORE_SIZE, Vec2{-0.45f, 0.4f});
-    auto scoreRight01 = std::make_unique<Score<>>(SCORE_SIZE, Vec2{0.55f, 0.4f});
-    auto scoreRight10 = std::make_unique<Score<>>(SCORE_SIZE, Vec2{0.45f, 0.4f});
-    auto gameOver = std::make_unique<GameOver<>>(GAMEOVER_SIZE, Vec2{0.0f, 0.0f});
-    auto winGame = std::make_unique<GameOver<>>(WIN_SIZE, Vec2{0.0f, 0.0f});
-    auto readyGame = std::make_unique<GameOver<>>(READY_SIZE, Vec2{0.0f, 0.2f});
+    auto ball = std::make_unique<Ball>(BALL_RADIUS, 75.0f, 0.02f);
+    auto bar01 = std::make_unique<Bar>(BAR_SIZE, Vec2{-0.5f, 0.0f});
+    auto bar02 = std::make_unique<Bar>(BAR_SIZE, Vec2{0.5f, 0.0f});
+    auto scoreLeft10 = std::make_unique<Score>(SCORE_SIZE, Vec2{-0.55f, 0.4f});
+    auto scoreLeft01 = std::make_unique<Score>(SCORE_SIZE, Vec2{-0.45f, 0.4f});
+    auto scoreRight01 = std::make_unique<Score>(SCORE_SIZE, Vec2{0.55f, 0.4f});
+    auto scoreRight10 = std::make_unique<Score>(SCORE_SIZE, Vec2{0.45f, 0.4f});
+    auto gameOver = std::make_unique<GameOver>(GAMEOVER_SIZE, Vec2{0.0f, 0.0f});
+    auto winGame = std::make_unique<GameOver>(WIN_SIZE, Vec2{0.0f, 0.0f});
+    auto readyGame = std::make_unique<GameOver>(READY_SIZE, Vec2{0.0f, 0.2f});
     
     if(!glfwInit()){
         return -1;
@@ -75,13 +74,13 @@ int main(int argc, const char * argv[]) {
     
     shader.SetUp();
     
-    GLuint ballId = LoadBmp("Ball01.bmp", 122);
-    GLuint bar01Id = LoadBmp("Bar01.bmp", 122);
-    GLuint bar02Id = LoadBmp("Bar02.bmp", 122);
-    GLuint scoreId = LoadBmp("Numbers.bmp", 122);
-    GLuint gameOverId = LoadBmp("GameOver.bmp", 122);
-    GLuint winId = LoadBmp("Win.bmp", 122);
-    GLuint readyId = LoadBmp("Ready.bmp", 122);
+    GLuint ballId = LoadBmp("Ball01.bmp");
+    GLuint bar01Id = LoadBmp("Bar01.bmp");
+    GLuint bar02Id = LoadBmp("Bar02.bmp");
+    GLuint scoreId = LoadBmp("Numbers.bmp");
+    GLuint gameOverId = LoadBmp("GameOver.bmp");
+    GLuint winId = LoadBmp("Win.bmp");
+    GLuint readyId = LoadBmp("Ready.bmp");
     
     int pointLeft = 0;
     int pointRight = 0;
@@ -91,7 +90,8 @@ int main(int argc, const char * argv[]) {
     bool countDown = true;
     bool game = true;
     
-    while(!glfwWindowShouldClose(window))
+    while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+          glfwWindowShouldClose(window) == 0)
     {
         if(pointLeft == WIN_SCORE || pointRight == WIN_SCORE)
         {
@@ -292,11 +292,6 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
             restart = true;
         }
     }
-    
-    if(input.mKeyStates[GLFW_KEY_ESCAPE].pressed)
-    {
-        glfwSetWindowShouldClose(window, true);
-    }
 }
 
 template<int IBall, int IBar>
@@ -329,77 +324,4 @@ bool IsTouchedBar02_X(Sprite<IBall> ball, Sprite<IBar> bar)
     }
     
     return false;
-}
-
-
-GLuint LoadBmp(const char* filename, int size)
-{
-    int bmpHeaderSize = size;
-    char header[bmpHeaderSize];
-    
-    GLuint id;
-    glGenTextures(1, &id);
-    
-    std::ifstream fstr(filename, std::ios::binary);
-    if(!fstr){
-        std::cout << "Failed to load " << filename << ".\n";
-        return -1;
-    }
-    
-    fstr.read(header, bmpHeaderSize);
-    if(header[0] != 'B' || header[1] != 'M'){
-        std::cout << "Not a correct BMP file.\n";
-        return 0;
-    }
-    
-    int dataPos = *(int*)&(header[0x0A]);
-    int imageSize = *(int*)&(header[0x22]);
-    int width = *(int*)&(header[0x12]);
-    int height = *(int*)&(header[0x16]);
-    if(imageSize == 0){
-        imageSize = width * height * 3;
-    }
-    
-    if(dataPos == 0){
-        dataPos = size;
-    }
-    
-    const size_t fileSize = static_cast<size_t>(fstr.seekg(0, fstr.end).tellg());
-    fstr.seekg(0, fstr.beg);
-    if(fileSize >= std::numeric_limits<size_t>::max()){
-        std::cout << "Failed to get filesize that must be less than size_t max.\n";
-    }
-    
-    char* textureBuffer = new char[fileSize];
-    fstr.read(textureBuffer, fileSize);
-    
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glBindTexture(GL_TEXTURE_2D, id);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, textureBuffer + size);
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    
-    delete[] textureBuffer;
-    glBindTexture(GL_TEXTURE_2D, 0);
-    
-    return id;
-}
-
-#ifdef WINDOWS
-#include <direct.h>
-#define GetCurrentDir _getcwd
-#else
-#include <unistd.h>
-#define GetCurrentDir getcwd
-#endif
-
-std::string GetCurrentWorkingDir(void)
-{
-    char buff[FILENAME_MAX];
-    GetCurrentDir(buff, FILENAME_MAX);
-    std::string currentWorkingDir(buff);
-    return currentWorkingDir;
 }

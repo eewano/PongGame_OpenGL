@@ -19,7 +19,7 @@
 #include "Loader.hpp"
 
 #define TIME 60
-#define WIN_SCORE 2
+#define WIN_SCORE 3
 
 bool gameIsOver = false;
 bool restart = false;
@@ -41,15 +41,15 @@ int main(int argc, const char * argv[]) {
     std::cout << "Current directory is " << GetCurrentWorkingDir().c_str() << ".\n";
     
     auto ball = std::make_unique<Ball>(BALL_RADIUS, 75.0f, 0.02f);
-    auto bar01 = std::make_unique<Bar>(BAR_SIZE, Vec2{-0.5f, 0.0f});
-    auto bar02 = std::make_unique<Bar>(BAR_SIZE, Vec2{0.5f, 0.0f});
-    auto scoreLeft10 = std::make_unique<Score>(SCORE_SIZE, Vec2{-0.55f, 0.4f});
-    auto scoreLeft01 = std::make_unique<Score>(SCORE_SIZE, Vec2{-0.45f, 0.4f});
-    auto scoreRight01 = std::make_unique<Score>(SCORE_SIZE, Vec2{0.55f, 0.4f});
-    auto scoreRight10 = std::make_unique<Score>(SCORE_SIZE, Vec2{0.45f, 0.4f});
-    auto gameOver = std::make_unique<GameOver>(GAMEOVER_SIZE, Vec2{0.0f, 0.0f});
-    auto winGame = std::make_unique<GameOver>(WIN_SIZE, Vec2{0.0f, 0.0f});
-    auto readyGame = std::make_unique<GameOver>(READY_SIZE, Vec2{0.0f, 0.2f});
+    auto bar01 = std::make_unique<Bar>(BAR_SIZE, Vec2{ -0.5f, 0.0f });
+    auto bar02 = std::make_unique<Bar>(BAR_SIZE, Vec2{ +0.5f, 0.0f });
+    auto scoreLeft10 = std::make_unique<Score>(SCORE_SIZE, Vec2{ -0.55f, 0.4f });
+    auto scoreLeft01 = std::make_unique<Score>(SCORE_SIZE, Vec2{ -0.45f, 0.4f });
+    auto scoreRight01 = std::make_unique<Score>(SCORE_SIZE, Vec2{ +0.55f, 0.4f });
+    auto scoreRight10 = std::make_unique<Score>(SCORE_SIZE, Vec2{ +0.45f, 0.4f });
+    auto gameOver = std::make_unique<GameOver>(GAMEOVER_SIZE, Vec2{ 0.0f, 0.0f });
+    auto winGame = std::make_unique<GameOver>(WIN_SIZE, Vec2{ 0.0f, 0.0f });
+    auto readyGame = std::make_unique<GameOver>(READY_SIZE, Vec2{ 0.0f, 0.2f });
     
     if(!glfwInit()){
         return -1;

@@ -10,7 +10,7 @@
 static constexpr int BAR_VERTS_COUNT = 4;
 static constexpr float BAR_WIDTH = 0.1f;
 static constexpr float BAR_LENGTH = 0.6f;
-static Vec2 BAR_SIZE = {BAR_WIDTH, BAR_LENGTH};
+static Vec2 BAR_SIZE = { BAR_WIDTH, BAR_LENGTH };
 
 class Bar : public Sprite<BAR_VERTS_COUNT>
 {

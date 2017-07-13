@@ -7,7 +7,7 @@ Ball::Ball(float aSize, float aDegree, float aSpeed)
 , mMoveVec{static_cast<float>(sin(aDegree / 180.0f * PI)), static_cast<float>(cos(aDegree / 180.0f * PI))}
 {
     SetVertex();
-    size = {aSize, aSize};
+    size = { aSize, aSize };
 }
 
 Ball::~Ball()
@@ -20,6 +20,7 @@ void Ball::SetVertex()
     {
         vertex[i].x = cos((float)i / BALL_VERTS_COUNT * PI * 2) * mSize;
         vertex[i].y = sin((float)i / BALL_VERTS_COUNT * PI * 2) * mSize;
+        
         uv[i].x = cos((float)i / BALL_VERTS_COUNT * PI * 2) * 0.5f + 0.5f;
         uv[i].y = sin((float)i / BALL_VERTS_COUNT * PI * 2) * 0.5f + 0.5f;
         

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <time.h>
+#include "Vec2.hpp"
 #include "Define.hpp"
 #include "Shader.hpp"
 #include "Sprite.hpp"
@@ -25,7 +26,7 @@ public:
     void Restart();
     
 private:
-    Vec2 mMoveVec;
+    Vec2f mMoveVec;
     float mDegree;
     float mSize;
     float mSpeed;

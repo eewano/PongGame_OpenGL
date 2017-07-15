@@ -25,8 +25,7 @@ void Ball::SetVertex()
         uv[i].y = sin((float)i / BALL_VERTS_COUNT * PI * 2) * 0.5f + 0.5f;
         
         //ジオメトリの値を設定しておく
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
     std::srand((unsigned int)std::time(NULL));
 }
@@ -59,8 +58,7 @@ void Ball::Move()
     
     for(size_t i = 0; i < BALL_VERTS_COUNT; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }
 
@@ -83,7 +81,6 @@ void Ball::Restart()
     
     for(size_t i = 0; i < BALL_VERTS_COUNT; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }

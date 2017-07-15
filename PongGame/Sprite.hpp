@@ -4,6 +4,7 @@
 #include <iostream>
 #include <linmath.h>
 #include "Shader.hpp"
+#include "Vec2.hpp"
 #include "Define.hpp"
 
 extern Shader shader;
@@ -35,11 +36,11 @@ public:
     }
     
 public:
-    Vec2 size{};
-    Vec2 pos{};
-    Vec2 vertex[I]{};
-    Vec2 geometry[I]{};
-    Vec2 uv[I]{};
+    Vec2f size{};
+    Vec2f pos{};
+    Vec2f vertex[I]{};
+    Vec2f geometry[I]{};
+    Vec2f uv[I]{};
 };
 
 #endif /* Sprite_hpp */

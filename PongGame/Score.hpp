@@ -2,17 +2,18 @@
 #define Score_h
 
 #include <iostream>
+#include "Vec2.hpp"
 #include "Define.hpp"
 #include "Shader.hpp"
 #include "Sprite.hpp"
 
 static constexpr int SCORE_VERTS_COUNT = 4;
-static Vec2 SCORE_SIZE = { 0.15f, 0.2f };
+static Vec2f SCORE_SIZE = { 0.15f, 0.2f };
 
 class Score : public Sprite<SCORE_VERTS_COUNT>
 {
 public:
-    Score(Vec2 aSize, Vec2 aPos);
+    Score(Vec2f aSize, Vec2f aPos);
     
     ~Score();
     

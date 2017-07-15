@@ -1,6 +1,6 @@
 #include "GameOver.hpp"
 
-GameOver::GameOver(Vec2 aSize, Vec2 aPos)
+GameOver::GameOver(Vec2f aSize, Vec2f aPos)
 {
     vertex[0] = geometry[0] = { -aSize.x / 2, +aSize.y / 2 };
     vertex[1] = geometry[1] = { +aSize.x / 2, +aSize.y / 2 };
@@ -17,8 +17,7 @@ GameOver::GameOver(Vec2 aSize, Vec2 aPos)
     
     for(size_t i = 0; i < 4; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }
 
@@ -33,8 +32,7 @@ void GameOver::winLeft()
     
     for(size_t i = 0; i < 4; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }
 
@@ -45,7 +43,6 @@ void GameOver::winRight()
     
     for(size_t i = 0; i < 4; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }

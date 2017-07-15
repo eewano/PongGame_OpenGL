@@ -1,6 +1,6 @@
 #include "Bar.hpp"
 
-Bar::Bar(Vec2 aSize, Vec2 aPos)
+Bar::Bar(Vec2f aSize, Vec2f aPos)
 {
     vertex[0] = geometry[0] = { -aSize.x / 2, +aSize.y / 2 };
     vertex[1] = geometry[1] = { +aSize.x / 2, +aSize.y / 2 };
@@ -17,8 +17,7 @@ Bar::Bar(Vec2 aSize, Vec2 aPos)
     
     for(size_t i = 0; i < BAR_VERTS_COUNT; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }
 
@@ -26,19 +25,8 @@ Bar::~Bar()
 {
 }
 
-void Bar::MoveUp()
+void Bar::Move(Vec2f aVec)
 {
-    Move(Vec2{ 0, +MOVE_SPEED });
-}
-
-void Bar::MoveDown()
-{
-    Move(Vec2{ 0, -MOVE_SPEED });
-}
-
-void Bar::Move(Vec2 aVec)
-{
-    pos.x += aVec.x;
     pos.y += aVec.y;
     
     if(pos.y > Y_LIMIT - vertex[0].y)
@@ -53,8 +41,7 @@ void Bar::Move(Vec2 aVec)
     
     for(size_t i = 0; i < BAR_VERTS_COUNT; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }
 
@@ -64,7 +51,6 @@ void Bar::Restart()
     
     for(size_t i = 0; i < BAR_VERTS_COUNT; i++)
     {
-        geometry[i].x = pos.x + vertex[i].x;
-        geometry[i].y = pos.y + vertex[i].y;
+        geometry[i] = pos + vertex[i];
     }
 }

@@ -9,6 +9,7 @@
 #include <vector>
 
 #include "Shader.hpp"
+#include "Vec2.hpp"
 #include "Define.hpp"
 #include "Bar.hpp"
 #include "Ball.hpp"
@@ -17,6 +18,7 @@
 #include "GameOver.hpp"
 #include "Utility.hpp"
 #include "Loader.hpp"
+#include "GameManager.hpp"
 
 #define TIME 60
 #define WIN_SCORE 3
@@ -41,15 +43,15 @@ int main(int argc, const char * argv[]) {
     std::cout << "Current directory is " << GetCurrentWorkingDir().c_str() << ".\n";
     
     auto ball = std::make_unique<Ball>(BALL_RADIUS, 75.0f, 0.02f);
-    auto bar01 = std::make_unique<Bar>(BAR_SIZE, Vec2{ -0.5f, 0.0f });
-    auto bar02 = std::make_unique<Bar>(BAR_SIZE, Vec2{ +0.5f, 0.0f });
-    auto scoreLeft10 = std::make_unique<Score>(SCORE_SIZE, Vec2{ -0.55f, 0.4f });
-    auto scoreLeft01 = std::make_unique<Score>(SCORE_SIZE, Vec2{ -0.45f, 0.4f });
-    auto scoreRight01 = std::make_unique<Score>(SCORE_SIZE, Vec2{ +0.55f, 0.4f });
-    auto scoreRight10 = std::make_unique<Score>(SCORE_SIZE, Vec2{ +0.45f, 0.4f });
-    auto gameOver = std::make_unique<GameOver>(GAMEOVER_SIZE, Vec2{ 0.0f, 0.0f });
-    auto winGame = std::make_unique<GameOver>(WIN_SIZE, Vec2{ 0.0f, 0.0f });
-    auto readyGame = std::make_unique<GameOver>(READY_SIZE, Vec2{ 0.0f, 0.2f });
+    auto bar01 = std::make_unique<Bar>(BAR_SIZE, Vec2f{ -0.5f, 0.0f });
+    auto bar02 = std::make_unique<Bar>(BAR_SIZE, Vec2f{ +0.5f, 0.0f });
+    auto scoreLeft10 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ -0.55f, 0.4f });
+    auto scoreLeft01 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ -0.45f, 0.4f });
+    auto scoreRight01 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ +0.55f, 0.4f });
+    auto scoreRight10 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ +0.45f, 0.4f });
+    auto gameOver = std::make_unique<GameOver>(GAMEOVER_SIZE, Vec2f{ 0.0f, 0.0f });
+    auto winGame = std::make_unique<GameOver>(WIN_SIZE, Vec2f{ 0.0f, 0.0f });
+    auto readyGame = std::make_unique<GameOver>(READY_SIZE, Vec2f{ 0.0f, 0.2f });
     
     if(!glfwInit()){
         return -1;
@@ -105,20 +107,20 @@ int main(int argc, const char * argv[]) {
                 //---各バーの移動---
                 if(input.mKeyStates[GLFW_KEY_W].pressed)
                 {
-                    bar01->MoveUp();
+                    bar01->Move({ 0, MOVE_SPEED });
                 }
                 else if(input.mKeyStates[GLFW_KEY_S].pressed)
                 {
-                    bar01->MoveDown();
+                    bar01->Move({ 0, MOVE_SPEED * -1.0f });
                 }
                 
                 if(input.mKeyStates[GLFW_KEY_I].pressed)
                 {
-                    bar02->MoveUp();
+                    bar02->Move({ 0, MOVE_SPEED });
                 }
                 else if(input.mKeyStates[GLFW_KEY_K].pressed)
                 {
-                    bar02->MoveDown();
+                    bar02->Move({ 0, MOVE_SPEED * -1.0f });
                 }
                 //---各バーの移動---
                 
@@ -213,7 +215,7 @@ int main(int argc, const char * argv[]) {
                 ball->Restart();
                 bar01->Restart();
                 bar02->Restart();
-
+                
                 playing = false;
                 countDown = true;
                 game = true;

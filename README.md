@@ -1,6 +1,6 @@
 # PongGame_OpenGL
 
-！「PongGame＿OpenGL]https://user-images.githubusercontent.com/9584187/28249206-ebb02adc-6a8b-11e7-8e73-f7099fa5b919.png
+![PongGame_OpenGL](https://user-images.githubusercontent.com/9584187/28249206-ebb02adc-6a8b-11e7-8e73-f7099fa5b919.png)
 
 メジャーである、ポンゲームのサンプルです。お互いにバーを動かしてボールを反射させ、相手バーの後ろへボールを移動させたらポイントとなります。
 どちらかが先に３ポイント先取したら勝ちです。

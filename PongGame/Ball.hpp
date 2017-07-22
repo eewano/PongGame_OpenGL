@@ -11,7 +11,7 @@
 
 static constexpr float PI = 3.14159265358f;
 static constexpr int BALL_VERTS_COUNT = 32;
-static constexpr float BALL_RADIUS = 0.1f;
+static const float BALL_RADIUS = 0.1f;
 
 class Ball : public Sprite<BALL_VERTS_COUNT>
 {

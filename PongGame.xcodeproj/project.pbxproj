@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		101091961F19F32800423194 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 101091941F19F32800423194 /* GameManager.cpp */; };
+		105DA4C21F23439A00E2B111 /* Texts.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 105DA4C01F23439A00E2B111 /* Texts.cpp */; };
 		10E22F081F15E9D700EFFC28 /* Bar.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E22F071F15E9D700EFFC28 /* Bar.cpp */; };
 		10E22F0A1F15EAE300EFFC28 /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E22F091F15EAE300EFFC28 /* Ball.cpp */; };
-		10E22F0D1F16067400EFFC28 /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E22F0C1F16067400EFFC28 /* GameOver.cpp */; };
 		10E22F0F1F16074E00EFFC28 /* Score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10E22F0E1F16074E00EFFC28 /* Score.cpp */; };
 		10EE110A1EE103D900DF8D57 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10EE11081EE103D900DF8D57 /* Input.cpp */; };
 		10F613231ED823E700194313 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 10F613221ED823E700194313 /* main.cpp */; };
@@ -39,15 +39,15 @@
 		101091931F19EDC200423194 /* Vec2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Vec2.hpp; sourceTree = "<group>"; };
 		101091941F19F32800423194 /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		101091951F19F32800423194 /* GameManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameManager.hpp; sourceTree = "<group>"; };
+		105DA4C01F23439A00E2B111 /* Texts.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texts.cpp; sourceTree = "<group>"; };
+		105DA4C11F23439A00E2B111 /* Texts.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texts.hpp; sourceTree = "<group>"; };
 		10DE0ADC1EE25B2B00ABA1BB /* Score.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Score.hpp; sourceTree = "<group>"; };
 		10E22F051F15CE2F00EFFC28 /* Utility.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Utility.hpp; sourceTree = "<group>"; };
 		10E22F061F15CFF900EFFC28 /* Loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Loader.hpp; sourceTree = "<group>"; };
 		10E22F071F15E9D700EFFC28 /* Bar.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bar.cpp; sourceTree = "<group>"; };
 		10E22F091F15EAE300EFFC28 /* Ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		10E22F0B1F15F61700EFFC28 /* Define.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Define.hpp; sourceTree = "<group>"; };
-		10E22F0C1F16067400EFFC28 /* GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
 		10E22F0E1F16074E00EFFC28 /* Score.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Score.cpp; sourceTree = "<group>"; };
-		10E421201EE4EB0C001B9A0F /* GameOver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameOver.hpp; sourceTree = "<group>"; };
 		10EE11081EE103D900DF8D57 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
 		10EE11091EE103D900DF8D57 /* Input.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 		10F6131F1ED823E700194313 /* PongGame */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PongGame; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,13 +115,13 @@
 				10F613411ED8307D00194313 /* Ball.hpp */,
 				10E22F0E1F16074E00EFFC28 /* Score.cpp */,
 				10DE0ADC1EE25B2B00ABA1BB /* Score.hpp */,
-				10E22F0C1F16067400EFFC28 /* GameOver.cpp */,
-				10E421201EE4EB0C001B9A0F /* GameOver.hpp */,
 				10EE11081EE103D900DF8D57 /* Input.cpp */,
 				10EE11091EE103D900DF8D57 /* Input.hpp */,
 				101091931F19EDC200423194 /* Vec2.hpp */,
 				101091941F19F32800423194 /* GameManager.cpp */,
 				101091951F19F32800423194 /* GameManager.hpp */,
+				105DA4C01F23439A00E2B111 /* Texts.cpp */,
+				105DA4C11F23439A00E2B111 /* Texts.hpp */,
 			);
 			path = PongGame;
 			sourceTree = "<group>";
@@ -197,11 +197,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				10E22F0A1F15EAE300EFFC28 /* Ball.cpp in Sources */,
-				10E22F0D1F16067400EFFC28 /* GameOver.cpp in Sources */,
 				10EE110A1EE103D900DF8D57 /* Input.cpp in Sources */,
 				10F613381ED824C100194313 /* Shader.cpp in Sources */,
 				10E22F081F15E9D700EFFC28 /* Bar.cpp in Sources */,
 				101091961F19F32800423194 /* GameManager.cpp in Sources */,
+				105DA4C21F23439A00E2B111 /* Texts.cpp in Sources */,
 				10F613231ED823E700194313 /* main.cpp in Sources */,
 				10E22F0F1F16074E00EFFC28 /* Score.cpp in Sources */,
 			);

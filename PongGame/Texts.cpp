@@ -1,6 +1,6 @@
-#include "GameOver.hpp"
+#include "Texts.hpp"
 
-GameOver::GameOver(Vec2f aSize, Vec2f aPos)
+Texts::Texts(Vec2f aSize, Vec2f aPos)
 {
     vertex[0] = geometry[0] = { -aSize.x / 2, +aSize.y / 2 };
     vertex[1] = geometry[1] = { +aSize.x / 2, +aSize.y / 2 };
@@ -21,11 +21,11 @@ GameOver::GameOver(Vec2f aSize, Vec2f aPos)
     }
 }
 
-GameOver::~GameOver()
+Texts::~Texts()
 {
 }
 
-void GameOver::winLeft()
+void Texts::winLeft()
 {
     pos.x = -0.5;
     pos.y = 0.25;
@@ -36,7 +36,7 @@ void GameOver::winLeft()
     }
 }
 
-void GameOver::winRight()
+void Texts::winRight()
 {
     pos.x = 0.5;
     pos.y = 0.25;

@@ -9,6 +9,11 @@
 #define GetCurrentDir getcwd
 #endif
 
+void ErrorCallback(int error, const char* description)
+{
+    std::cerr << "Error: " << description << ".\n";
+}
+
 std::string GetCurrentWorkingDir()
 {
     char buff[FILENAME_MAX];

@@ -15,19 +15,46 @@
 #include "Ball.hpp"
 #include "Input.hpp"
 #include "Score.hpp"
-#include "GameOver.hpp"
+#include "Texts.hpp"
 #include "Utility.hpp"
 #include "Loader.hpp"
 #include "GameManager.hpp"
 
-#define TIME 60
-#define WIN_SCORE 3
+bool isGameOver;
+bool isReady;
+bool isGameStop;
+bool isRestart;
+int pointLeft;
+int pointRight;
+int timeCount;
 
-bool gameIsOver = false;
-bool restart = false;
+const float X_LIMIT = 0.5f * ASPECT_RATIO - BALL_RADIUS * 0.5;
 
-void ErrorCallback(int error, const char* description);
+std::unique_ptr<Ball> mBall;
+std::unique_ptr<Bar> mBarLeft;
+std::unique_ptr<Bar> mBarRight;
+std::unique_ptr<Score> mScore10Left;
+std::unique_ptr<Score> mScore01Left;
+std::unique_ptr<Score> mScore01Right;
+std::unique_ptr<Score> mScore10Right;
+std::unique_ptr<Texts> gameOver;
+std::unique_ptr<Texts> winGame;
+std::unique_ptr<Texts> readyGame;
+
+GLuint ballId;
+GLuint bar01Id;
+GLuint bar02Id;
+GLuint scoreId;
+GLuint gameOverId;
+GLuint winId;
+GLuint readyId;
+
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+void InitGame();
+void GetScore(char player);
+void ReadyGame();
+void StopGame();
+void Draw();
 
 template<int IBall, int IBar>
 bool IsTouchedBar01_X(Sprite<IBall> ball, Sprite<IBar> bar);
@@ -42,16 +69,16 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "Current directory is " << GetCurrentWorkingDir().c_str() << ".\n";
     
-    auto ball = std::make_unique<Ball>(BALL_RADIUS, 75.0f, 0.02f);
-    auto bar01 = std::make_unique<Bar>(BAR_SIZE, Vec2f{ -0.5f, 0.0f });
-    auto bar02 = std::make_unique<Bar>(BAR_SIZE, Vec2f{ +0.5f, 0.0f });
-    auto scoreLeft10 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ -0.55f, 0.4f });
-    auto scoreLeft01 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ -0.45f, 0.4f });
-    auto scoreRight01 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ +0.55f, 0.4f });
-    auto scoreRight10 = std::make_unique<Score>(SCORE_SIZE, Vec2f{ +0.45f, 0.4f });
-    auto gameOver = std::make_unique<GameOver>(GAMEOVER_SIZE, Vec2f{ 0.0f, 0.0f });
-    auto winGame = std::make_unique<GameOver>(WIN_SIZE, Vec2f{ 0.0f, 0.0f });
-    auto readyGame = std::make_unique<GameOver>(READY_SIZE, Vec2f{ 0.0f, 0.2f });
+    mBall = std::make_unique<Ball>(BALL_RADIUS, 75.0f, 0.02f);
+    mBarLeft = std::make_unique<Bar>(BAR_SIZE, Vec2f{ -0.5f, 0.0f });
+    mBarRight = std::make_unique<Bar>(BAR_SIZE, Vec2f{ +0.5f, 0.0f });
+    mScore10Left = std::make_unique<Score>(SCORE_SIZE, Vec2f{ -0.55f, 0.4f });
+    mScore01Left = std::make_unique<Score>(SCORE_SIZE, Vec2f{ -0.45f, 0.4f });
+    mScore01Right = std::make_unique<Score>(SCORE_SIZE, Vec2f{ +0.55f, 0.4f });
+    mScore10Right = std::make_unique<Score>(SCORE_SIZE, Vec2f{ +0.45f, 0.4f });
+    gameOver = std::make_unique<Texts>(GAMEOVER_SIZE, Vec2f{ 0.0f, 0.0f });
+    winGame = std::make_unique<Texts>(WIN_SIZE, Vec2f{ 0.0f, 0.0f });
+    readyGame = std::make_unique<Texts>(READY_SIZE, Vec2f{ 0.0f, 0.2f });
     
     if(!glfwInit()){
         return -1;
@@ -76,192 +103,90 @@ int main(int argc, const char * argv[]) {
     
     shader.SetUp();
     
-    GLuint ballId = LoadBmp("Ball01.bmp");
-    GLuint bar01Id = LoadBmp("Bar01.bmp");
-    GLuint bar02Id = LoadBmp("Bar02.bmp");
-    GLuint scoreId = LoadBmp("Numbers.bmp");
-    GLuint gameOverId = LoadBmp("GameOver.bmp");
-    GLuint winId = LoadBmp("Win.bmp");
-    GLuint readyId = LoadBmp("Ready.bmp");
+    ballId = LoadBmp("Ball01.bmp");
+    bar01Id = LoadBmp("Bar01.bmp");
+    bar02Id = LoadBmp("Bar02.bmp");
+    scoreId = LoadBmp("Numbers.bmp");
+    gameOverId = LoadBmp("GameOver.bmp");
+    winId = LoadBmp("Win.bmp");
+    readyId = LoadBmp("Ready.bmp");
     
-    int pointLeft = 0;
-    int pointRight = 0;
+    InitGame();
+    ReadyGame();
     
-    int time = TIME;
-    bool playing = false;
-    bool countDown = true;
-    bool game = true;
+    timeCount = 0;
     
     while(glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
           glfwWindowShouldClose(window) == 0)
     {
-        if(pointLeft == WIN_SCORE || pointRight == WIN_SCORE)
+        if(isGameOver)
         {
-            gameIsOver = true;
+            if(isRestart == true)
+            {
+                InitGame();
+            }
         }
-        
-        if(!gameIsOver)
+        else
         {
-            if(playing)
+            if(isGameStop)
+            {
+                StopGame();
+            }
+            else
             {
                 //---各バーの移動---
                 if(input.mKeyStates[GLFW_KEY_W].pressed)
                 {
-                    bar01->Move({ 0, MOVE_SPEED });
+                    mBarLeft->Move({ 0, MOVE_SPEED });
                 }
                 else if(input.mKeyStates[GLFW_KEY_S].pressed)
                 {
-                    bar01->Move({ 0, MOVE_SPEED * -1.0f });
+                    mBarLeft->Move({ 0, MOVE_SPEED * -1.0f });
                 }
                 
                 if(input.mKeyStates[GLFW_KEY_I].pressed)
                 {
-                    bar02->Move({ 0, MOVE_SPEED });
+                    mBarRight->Move({ 0, MOVE_SPEED });
                 }
                 else if(input.mKeyStates[GLFW_KEY_K].pressed)
                 {
-                    bar02->Move({ 0, MOVE_SPEED * -1.0f });
+                    mBarRight->Move({ 0, MOVE_SPEED * -1.0f });
                 }
                 //---各バーの移動---
                 
                 //---ボールがバーに当たった際のX軸での処理---
-                if(IsTouchedBar01_X(*ball, *bar01))
+                if(IsTouchedBar01_X(*mBall, *mBarLeft))
                 {
-                    ball->SwitchX();
+                    mBall->SwitchX();
                 }
                 
-                if(IsTouchedBar02_X(*ball, *bar02))
+                if(IsTouchedBar02_X(*mBall, *mBarRight))
                 {
-                    ball->SwitchX();
+                    mBall->SwitchX();
                 }
                 //---ボールがバーに当たった際のX軸での処理---
                 
-                //---得点の処理---
-                const float X_LIMIT = 0.67f - BALL_RADIUS * 0.5;
-                
-                if(ball->pos.x > X_LIMIT)
+                if(mBall->pos.x > X_LIMIT)
                 {
-                    pointLeft++;
-                    scoreLeft01->Update(pointLeft);
-                    
-                    if(pointLeft >= 10)
-                    {
-                        scoreLeft10->Update(pointLeft / 10);
-                    }
-                    
-                    playing = false;
-                    countDown = true;
-                    game = false;
+                    GetScore('L');
+                    ReadyGame();
                 }
-                else if(ball->pos.x < -X_LIMIT)
+                else if(mBall->pos.x < -X_LIMIT)
                 {
-                    pointRight++;
-                    scoreRight01->Update(pointRight);
-                    
-                    if(pointRight >= 10)
-                    {
-                        scoreRight10->Update(pointRight / 10);
-                    }
-                    
-                    playing = false;
-                    countDown = true;
-                    game = false;
+                    GetScore('R');
+                    ReadyGame();
                 }
-                //---得点の処理---
                 
-                ball->Move();
+                mBall->Move();
             }
-            
-            //---得点が入った時---
-            if(countDown)
-            {
-                time--;
-                
-                if(time <= 0)
-                {
-                    if(!game)
-                    {
-                        time = TIME;
-                        ball->Restart();
-                        bar01->Restart();
-                        bar02->Restart();
-                        game = true;
-                    }
-                    else
-                    {
-                        time = TIME;
-                        countDown = false;
-                        playing = true;
-                    }
-                }
-            }
-            //---得点が入った時---
         }
-        //----ゲームオーバー時----
-        else
+        
+        if(pointLeft == WIN_SCORE || pointRight == WIN_SCORE)
         {
-            if(restart == true)
-            {
-                gameIsOver = false;
-                
-                time = TIME;
-                pointLeft = 0;
-                pointRight = 0;
-                scoreLeft01->RestartUv();
-                scoreLeft10->RestartUv();
-                scoreRight01->RestartUv();
-                scoreRight10->RestartUv();
-                
-                ball->Restart();
-                bar01->Restart();
-                bar02->Restart();
-                
-                playing = false;
-                countDown = true;
-                game = true;
-                
-                restart = false;
-            }
-        }
-        //----ゲームオーバー時----
-        
-        //----描画----
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearDepth(1.0);
-        
-        ball->Draw(ballId);
-        bar01->Draw(bar01Id);
-        bar02->Draw(bar02Id);
-        scoreLeft01->Draw(scoreId);
-        scoreLeft10->Draw(scoreId);
-        scoreRight01->Draw(scoreId);
-        scoreRight10->Draw(scoreId);
-        
-        if(!playing)
-        {
-            if(game)
-            {
-                readyGame->Draw(readyId);
-            }
+            isGameOver = true;
         }
         
-        if(gameIsOver)
-        {
-            gameOver->Draw(gameOverId);
-            
-            if(pointLeft == WIN_SCORE)
-            {
-                winGame->winLeft();
-                winGame->Draw(winId);
-            }
-            else if(pointRight == WIN_SCORE)
-            {
-                winGame->winRight();
-                winGame->Draw(winId);
-            }
-        }
-        //----描画----
+        Draw();
         
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -269,11 +194,6 @@ int main(int argc, const char * argv[]) {
     
     glfwTerminate();
     return 0;
-}
-
-void ErrorCallback(int error, const char* description)
-{
-    std::cerr << "Error: " << description << ".\n";
 }
 
 void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -287,11 +207,115 @@ void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods
         input.mKeyStates[key].pressed = false;
     }
     
-    if(gameIsOver)
+    if(isGameOver)
     {
         if(input.mKeyStates[GLFW_KEY_R].pressed)
         {
-            restart = true;
+            isRestart = true;
+        }
+    }
+}
+
+void InitGame()
+{
+    isGameOver = false;
+    isRestart = false;
+    pointLeft = 0;
+    pointRight = 0;
+    mScore01Left->RestartUv();
+    mScore10Left->RestartUv();
+    mScore01Right->RestartUv();
+    mScore10Right->RestartUv();
+    ReadyGame();
+}
+
+void GetScore(char player)
+{
+    switch(player)
+    {
+        case 'L':
+            pointLeft++;
+            mScore01Left->Update(pointLeft);
+            
+            if(pointLeft >= 10)
+            {
+                mScore10Left->Update(pointLeft / 10);
+            }
+            break;
+            
+        case 'R':
+            pointRight++;
+            mScore01Right->Update(pointRight);
+            
+            if(pointRight >= 10)
+            {
+                mScore10Right->Update(pointRight / 10);
+            }
+            break;
+            
+        default:
+            std::cout << "Unknown character !\n";
+            break;
+    }
+}
+
+void StopGame()
+{
+    timeCount++;
+    
+    if(timeCount % INTERVAL == 0)
+    {
+        isGameStop = false;
+        isReady = false;
+    }
+}
+
+void ReadyGame()
+{
+    isReady = true;
+    isGameStop = true;
+    mBall->Restart();
+    mBarLeft->Restart();
+    mBarRight->Restart();
+}
+
+void Draw()
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClearDepth(1.0);
+    
+    mBall->Draw(ballId);
+    mBarLeft->Draw(bar01Id);
+    mBarRight->Draw(bar02Id);
+    mScore01Left->Draw(scoreId);
+    mScore10Left->Draw(scoreId);
+    mScore01Right->Draw(scoreId);
+    mScore10Right->Draw(scoreId);
+    
+    if(isGameOver)
+    {
+        gameOver->Draw(gameOverId);
+        
+        if(pointLeft == WIN_SCORE)
+        {
+            winGame->winLeft();
+            winGame->Draw(winId);
+        }
+        else if(pointRight == WIN_SCORE)
+        {
+            winGame->winRight();
+            winGame->Draw(winId);
+        }
+    }
+    else
+    {
+        if(isGameStop)
+        {
+            if(isReady)
+            {
+                readyGame->Draw(readyId);
+            }
         }
     }
 }

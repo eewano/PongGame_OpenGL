@@ -1,4 +1,5 @@
 #include "Ball.hpp"
+#include <random>
 
 Ball::Ball(float aSize, float aDegree, float aSpeed)
 : mDegree(aDegree)
@@ -35,17 +36,7 @@ void Ball::Move()
     pos.x += mMoveVec.x * mSpeed;
     pos.y += mMoveVec.y * mSpeed;
     
-    const float BALL_X_LIMIT = 0.67f - mSize * 0.5;
     const float BALL_Y_LIMIT = 0.5f - mSize * 0.5;
-    
-    if(pos.x > BALL_X_LIMIT)
-    {
-        mMoveVec.x *= -1;
-    }
-    else if(pos.x < -BALL_X_LIMIT)
-    {
-        mMoveVec.x *= -1;
-    }
     
     if(pos.y > BALL_Y_LIMIT)
     {
@@ -75,6 +66,7 @@ void Ball::SwitchY()
 
 void Ball::Restart()
 {
+    mMoveVec.x *= -1;
     mMoveVec.y = (rand() % 20 - 10) * 0.05;
     pos.x = 0;
     pos.y = 0;

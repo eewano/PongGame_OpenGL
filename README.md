@@ -20,7 +20,7 @@
 
 なお、当ゲームをプレイするに当たり、ヘッダーファイルやXcodeの設定が必要となります。詳細は、  
 
-・InstallingHeaderFile.pdf  
-・OpenGLSetting.pdf  
+・20191024InstallingHeaderFile.pdf  
+・20191024OpenGLSetting.pdf  
 
 を、それぞれ参照して下さい。
